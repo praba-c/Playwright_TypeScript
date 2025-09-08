@@ -1,5 +1,4 @@
 import {test, expect} from "@playwright/test";
-import { StringDecoder } from "string_decoder";
 
 test('elements', async ({page}) => {
     await page.goto('https://letcode.in/elements');
@@ -23,12 +22,14 @@ test('elements', async ({page}) => {
         const page1 = await page.locator("//app-repos/div/div//a").allTextContents();
         repoListCount.push(...page1)
         const nextBtn = page.locator("//button[@class='pagination-next']");
-        if (!(await nextBtn.isDisabled())) {
+        if (await nextBtn.isDisabled()) {
             break;
         }
         await nextBtn.click();
-        await page.waitForLoadState("domcontentloaded");
+        await page.waitForLoadState("networkidle");
     }
     console.log('repoListCount:', repoListCount.length);
     console.log(repoListCount);
+
+    expect(publicRepoCount?.trim()).toEqual(repoListCount.length.toString());
 });
