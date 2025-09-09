@@ -14,7 +14,7 @@ test('windows', async({page, context}) => {
     await page.close();
 });
 
-test ('multiple windoes', async({page, context}) => {
+test ('multiple windows', async({page, context}) => {
     await page.goto('https://letcode.in/window');
     await page.click('#multi');
     await page.waitForTimeout(3000);

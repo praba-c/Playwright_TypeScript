@@ -3,7 +3,7 @@ import {test, expect} from "@playwright/test";
 test('drag and drop', async({page}) => {
     await page.goto('https://letcode.in/sortable');
     const toDo = await page.locator("//div[@id='cdk-drop-list-0']/div").count();
-    await page.waitForTimeout(3000);
+    //await page.waitForTimeout(3000);
 
     for (let i=0;i<toDo;++i) {
         const source = await page.locator("//div[@id='cdk-drop-list-0']/div").nth(0).boundingBox();

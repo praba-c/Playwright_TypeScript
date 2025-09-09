@@ -22,4 +22,12 @@ test('alert', async({page}) => {
 
     await page.locator('#modern').click();
     await page.locator('[aria-label="close"]').click();
+}) 
+
+test('wait for alert', async({page}) => {
+    await page.goto('https://letcode.in/waits');
+    await page.locator('#accept').click();
+    const dialog = await page.waitForEvent('dialog');
+    console.log(dialog.message());
+    await dialog.accept();
 });
