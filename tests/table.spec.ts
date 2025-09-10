@@ -37,3 +37,9 @@ test('sort', async({page}) => {
         expect(prevVal).toBeLessThanOrEqual(currVal);
     }
 })
+
+test('calendar', async({page}) => {
+    await page.goto('https://letcode.in/calendar');
+    await page.locator('#birthday').fill('2025-09-10');
+    await page.waitForTimeout(2000);
+})
