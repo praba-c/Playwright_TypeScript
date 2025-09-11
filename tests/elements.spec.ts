@@ -20,7 +20,7 @@ test('elements', async ({page}) => {
     let repoListCount : any[] = [];
     while(true) {
         const page1 = await page.locator("//app-repos/div/div//a").allTextContents();
-        repoListCount.push(...page1)
+        repoListCount.push(...page1);
         const nextBtn = page.locator("//button[@class='pagination-next']");
         if (await nextBtn.isDisabled()) {
             break;

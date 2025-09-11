@@ -9,5 +9,5 @@ test('files', async({page}) => {
         page.locator('#xls').click()
     ])
 
-    await download.saveAs('downloads/myfile.txt');
+    await download.saveAs('C:/Users/291502/downloads/myfile.xlsx');
 })

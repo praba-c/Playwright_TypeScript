@@ -3,6 +3,8 @@ import {test, expect} from "@playwright/test";
 test ('drop', async({page}) => {
     await page.goto('https://letcode.in/droppable');
 
+    //await page.dragAndDrop('div#draggable', 'div#droppable');
+
     const source = await page.locator('#draggable').boundingBox();
     const target = await page.locator('#droppable').boundingBox();
 
