@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 
+test.describe.configure({mode:'parallel'})
 test('correct total', async ({ page }) => {
     await page.goto('https://letcode.in/table');
     const rows = page.locator('table#shopping tbody tr td:nth-child(2)');
@@ -11,7 +12,7 @@ test('correct total', async ({ page }) => {
     }
     const tot = await page.locator('table#shopping tfoot td b').textContent();
     expect(total.toString()).toEqual(tot);
-})
+});
 
 test('mark', async({page}) => {
     await page.goto('https://letcode.in/table');

@@ -6,12 +6,12 @@ let authToken: string;
 
 test.describe('test1', async () => {
 
-    test.beforeAll('POST', async ({ playwright }) => {
+    test.beforeAll('POST', async () => {
         apiContext = await request.newContext({
             baseURL: 'https://restful-booker.herokuapp.com',
             ignoreHTTPSErrors: true
         });
-    })
+    });
 
     test('POST', async () => {
         const response = await apiContext.post('/booking', {
@@ -49,9 +49,9 @@ test.describe('test1', async () => {
     });
 
     test('GET', async () => {
+        
         const response = await apiContext.get(`/booking/${bookingId}`);
         expect(response.status()).toBe(200);
-        const body = await response.json();
     });
 
     test('PARTIAL_UPDATE', async () => {
@@ -71,4 +71,34 @@ test.describe('test1', async () => {
         });
         expect(response.status()).toBe(201);
     });
-})
+});
+
+test('Intercept request using page.route', async ({ page }) => {
+//Intercept all calls to "jsonplaceholder.typicode.com/posts/1"
+  await page.route('**/posts/1', async route => {
+    // Fulfill with a mocked response
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({
+        userId: 999,
+        id: 1,
+        title: 'Intercepted Title',
+        body: 'This is a mocked response instead of real API data!'
+      })
+    });
+  });
+
+  // Navigate to a site that triggers the API call
+  //await page.goto('https://jsonplaceholder.typicode.com/');
+
+  // Make a fetch request inside the page to trigger interception
+  const data = await page.evaluate(async () => {
+    const res = await fetch('https://jsonplaceholder.typicode.com/posts/1');
+    return res.json();
+  });
+
+  console.log(data); // Will show our mocked JSON instead of real API
+  //expect(data.title).toBe('Intercepted Title');
+});
+

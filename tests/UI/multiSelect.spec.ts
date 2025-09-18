@@ -1,4 +1,4 @@
-import {test, expect} from "@playwright/test";
+import {test} from "@playwright/test";
 
 test('multi select', async({page}) => {
     await page.goto('https://letcode.in/selectable');
@@ -7,4 +7,4 @@ test('multi select', async({page}) => {
         console.log(await cnt.textContent());
         await cnt.click();
     }
-})
+});
