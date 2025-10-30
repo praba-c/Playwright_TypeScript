@@ -6,7 +6,7 @@ test('select', async ({ page }) => {
 
     await page.locator('#superheros').selectOption({ index: 10 });
     await page.waitForTimeout(5000);
-
+    
     const count = await page.locator("//select[@id='lang']/option").count();
     await page.locator('#lang').selectOption({ index: count - 1 });
 

@@ -19,3 +19,8 @@ test('drag and drop', async({page}) => {
     }
     await page.waitForTimeout(3000);
 })
+
+test ('screenshot', async({page}) => {
+    await page.goto('https://www.amazon.com/');
+    await page.screenshot({ path: 'amazon.png'});
+});
